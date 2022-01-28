@@ -4,7 +4,7 @@ Version: 1.0
 Autor: Renhetian
 Date: 2022-01-28 16:58:07
 LastEditors: Renhetian
-LastEditTime: 2022-01-28 17:23:58
+LastEditTime: 2022-01-28 17:31:31
 '''
 
 import os
@@ -47,6 +47,8 @@ oid_list = [
     '2313',
 ]
 
+# python scripts/video_reply.py
 if __name__ == "__main__":
     for i in oid_list:
+        print(command.format(str(i),str(i)))
         os.system(command.format(str(i),str(i)))
