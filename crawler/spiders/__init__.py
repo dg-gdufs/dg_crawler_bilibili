@@ -1,3 +1,11 @@
+'''
+Description: file description
+Version: 1.0
+Autor: Renhetian
+Date: 2022-01-28 14:40:14
+LastEditors: Renhetian
+LastEditTime: 2022-01-28 15:03:58
+'''
 # encoding: utf-8
 
 import scrapy
@@ -19,6 +27,11 @@ class BaseSpider(scrapy.Spider):
     proxy = '00' # 默认proxy
     mini_logger = None # 自带logger
     item_db = None # 数据库
+    custom_settings = {
+        "DEFAULT_REQUEST_HEADERS": {
+            'referer': 'https://www.bilibili.com/'
+        }
+    }
 
 
     def __init__(self, **kwargs):
