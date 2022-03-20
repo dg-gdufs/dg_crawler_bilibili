@@ -19,7 +19,7 @@ class UserInfoSpider(BaseSpider):
     url3 = 'https://api.bilibili.com/x/ugcpay-rank/elec/month/up?up_mid={}'
 
     def start_requests(self):
-        return Request(self.url1.format(self.mid), callback=self.parse_info)
+        yield Request(self.url1.format(self.mid), callback=self.parse_info)
 
     def parse_info(self, response):
         js = response.json().get('data')
@@ -38,7 +38,7 @@ class UserInfoSpider(BaseSpider):
         item['vip'] = js.get('vip',{}).get('type')
         item['official'] = js.get('official',{}).get('title')
 
-        return Request(self.url2.format(item['id']), meta={'item': item}, callback=self.parse_stat)
+        yield Request(self.url2.format(item['id']), meta={'item': item}, callback=self.parse_stat)
 
     def parse_stat(self, response):
         item = response.meta['item']
@@ -46,9 +46,10 @@ class UserInfoSpider(BaseSpider):
         if js:
             item['following'] = js.get('following')
             item['follower'] = js.get('follower')
-        return Request(self.url3.format(item['id']), meta={'item': item}, callback=self.parse_up)
+        yield Request(self.url3.format(item['id']), meta={'item': item}, callback=self.parse_up)
         
     def parse_up(self, response):
         item = response.meta['item']
         item['up'] = response.json().get('data',{}).get('total_count')
-        return item
+        self.send_log(1, "用户信息获取成功 ==> mid:<{}>".format(item['id']))
+        yield item
