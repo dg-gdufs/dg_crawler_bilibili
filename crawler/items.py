@@ -8,7 +8,6 @@ LastEditTime: 2022-02-10 13:10:03
 '''
 # encoding: utf-8
 
-from turtle import up
 import scrapy
 
 
