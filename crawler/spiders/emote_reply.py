@@ -12,8 +12,8 @@ from crawler.items import *
 from utils.date_util import DateUtil
 from scrapy.http.request import Request
 
-class EmoteReplySpider(BaseSpider):
-    name = 'emote_reply'
+class EmoteSpider(BaseSpider):
+    name = 'emote'
     url = 'https://api.bilibili.com/x/emote/package?business=reply&ids={}'
     custom_settings = {
         'ITEM_PIPELINES': {
